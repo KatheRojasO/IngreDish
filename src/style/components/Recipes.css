@@ -8,7 +8,11 @@
 
 @media (min-width: 425px) {
   .recipes_container {
-    margin: 0 auto; 
+    margin: 0 auto;
+  }
+
+  .recipes_container h1 {
+    padding: var(--space-medium) 0px 0px var(--space-big);
   }
 }
 
