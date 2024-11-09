@@ -1,5 +1,11 @@
 /* Colors */
 :root {
+  --color-yellow: #F0D34A;
+  --color-dark: #333333;
+  --color-beige: #FEF7EC;
+  --color-light-yellow: #FDF6D0;
+  --color-orange: #F1A23C;
+  --color-white: #FFFFFF;
 }
 
 /* Space */
