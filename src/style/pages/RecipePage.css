@@ -1,0 +1,14 @@
+.recipe_page_header {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--space-medium);
+  box-shadow: -5px 5px 10px #e3e3e3;
+}
+
+.cl-userButtonPopoverFooter {
+  display: none;
+}
+
+.logo {
+  width: 130px;
+}
