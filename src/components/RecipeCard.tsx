@@ -15,11 +15,7 @@ export function RecipeCard() {
       <h3>{recipe.title}</h3>
       <img src={recipe.image} alt={recipe.title} className="recipe-image" />
       <button onClick={toggleLike} className="like-button">
-        {liked ? (
-          <HeartFilledIcon />
-        ) : (
-          <HeartOutlineIcon/>
-        )}
+        {liked ? <HeartFilledIcon /> : <HeartOutlineIcon />}
       </button>
     </div>
   ));
