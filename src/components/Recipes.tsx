@@ -5,7 +5,7 @@ export function Recipes() {
   
 
   return (
-    <div>
+    <div className='recipes_container'>
       <h1>Recipes</h1>
       <RecipeCard />
     </div>

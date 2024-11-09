@@ -9,7 +9,6 @@ export function RecipePage() {
         <img src={logo} alt="logo" className="logo" />
         <UserButton />
       </header>
-
       <Recipes />
     </SignedIn>
   );

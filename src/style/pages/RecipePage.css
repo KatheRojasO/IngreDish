@@ -1,8 +1,10 @@
 .recipe_page_header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: var(--space-medium);
-  box-shadow: -5px 5px 10px #e3e3e3;
+  background-color: var(--color-white);
+  box-shadow: 0px 5px 5px hsl(0deg 0% 0% / 0.25);
 }
 
 .cl-userButtonPopoverFooter {
@@ -11,4 +13,13 @@
 
 .logo {
   width: 130px;
+}
+
+/*Refactor this*/
+.recipes_container {
+  margin: var(--space-medium);
+}
+
+.recipes_container h1 {
+  margin: 0px;
 }
