@@ -25,7 +25,12 @@ public class UserService {
         this.userRepo = userRepo;
     }
 
-    public void addUser(int userId, String userName){
+    public void addUser(String userId, String userName){
+        Optional<User> userOptional = userRepo.findUserByUserId(userId);
+        if(userOptional.isPresent()){
+            throw new IllegalArgumentException("User already exists");
+        }
+
         User user = new User();
 
         user.setUserId(userId);
@@ -35,7 +40,7 @@ public class UserService {
         userRepo.createOrUpdateUser(user);
     }
 
-    public void addFavoriteToUser(int userId, FavoriteDTO favoriteDto){
+    public void addFavoriteToUser(String userId, FavoriteDTO favoriteDto){
         Optional<User> userOptional = userRepo.findUserByUserId(userId);
         if(userOptional.isEmpty()){
             throw new RuntimeException("No user found for id:" + userId);
@@ -61,7 +66,7 @@ public class UserService {
         userRepo.createOrUpdateUser(user);
     }
 
-    public UserFavoriteDTO getUserFavoritesByUserId(int userId){
+    public UserFavoriteDTO getUserFavoritesByUserId(String userId){
         Optional<User> userOptional = userRepo.findUserByUserId(userId);
         if(userOptional.isEmpty()){
             throw new RuntimeException("No user found for id:" + userId);
@@ -73,11 +78,11 @@ public class UserService {
                 .map(favorite -> new FavoriteDTO(favorite.getRecipeId(), favorite.getTitle(), favorite.getImage()))
                 .toList();
 
-        return new UserFavoriteDTO(user.getUserId(), user.getName(), favorites);
+        return new UserFavoriteDTO(user.getUserId(), favorites);
     }
 
     @Transactional
-    public void deleteFavoriteForUser(int userId, int recipeId){
+    public void deleteFavoriteForUser(String userId, int recipeId){
         Optional<User> userOptional = userRepo.findUserByUserId(userId);
         if(userOptional.isEmpty()){
             throw new RuntimeException("No user found for id:" + userId);

@@ -16,15 +16,21 @@ public class UserController {
         this.userService = userService;
     }
 
+    @CrossOrigin(origins = "http://localhost:5173")
     @PostMapping("/api/users")
     @ResponseStatus(value = HttpStatus.CREATED)
     public void addUser(@RequestBody AddUserDTO addUserDTO){
-        userService.addUser(addUserDTO.userId(), addUserDTO.userName());
+        try {
+            userService.addUser(addUserDTO.userId(), addUserDTO.userName());
+        } catch (IllegalArgumentException e){
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "User Already exists");
+        }
     }
 
+    @CrossOrigin(origins = "http://localhost:5173")
     @PostMapping("/api/users/{userId}/favorites")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public void addFavoriteToUser(@PathVariable int userId, @RequestBody FavoriteDTO favoriteDto){
+    public void addFavoriteToUser(@PathVariable String userId, @RequestBody FavoriteDTO favoriteDto){
 
         try {
             userService.addFavoriteToUser(userId, favoriteDto);
@@ -35,8 +41,9 @@ public class UserController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:5173")
     @GetMapping("/api/users/{userId}/favorites")
-    public ResponseEntity<UserFavoriteDTO> getUserFavorites(@PathVariable int userId){
+    public ResponseEntity<UserFavoriteDTO> getUserFavorites(@PathVariable String userId){
         try {
             UserFavoriteDTO userFavoriteDto = userService.getUserFavoritesByUserId(userId);
             return ResponseEntity.ok(userFavoriteDto);
@@ -45,9 +52,10 @@ public class UserController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:5173")
     @DeleteMapping("/api/users/{userId}/favorites/{recipeId}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void deleteUserFavorite(@PathVariable int userId, @PathVariable int recipeId){
+    public void deleteUserFavorite(@PathVariable String userId, @PathVariable int recipeId){
         userService.deleteFavoriteForUser(userId, recipeId);
     }
 }

@@ -12,7 +12,7 @@ import java.util.List;
 @Table(name = "ingredish_user")
 public class User {
     @Id
-    private int userId;
+    private String userId;
 
     private String name;
 
@@ -21,16 +21,16 @@ public class User {
 
     public User() {}
 
-    public User(int userId, String name) {
+    public User(String userId, String name) {
         this.userId = userId;
         this.name = name;
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
