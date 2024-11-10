@@ -6,7 +6,6 @@ export function SearchBar({ recipesInfo, setFilteredRecipes }: SearchBarProps) {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const input = event.target.value;
-    console.log(input);
     setSearchInput(input);
 
     if (input.length > 0) {
@@ -14,8 +13,11 @@ export function SearchBar({ recipesInfo, setFilteredRecipes }: SearchBarProps) {
         recipe.title.toLowerCase().includes(input.toLowerCase())
       );
       setFilteredRecipes(filtered);
+    } else {
+      setFilteredRecipes(recipesInfo);
     }
   };
+
 
   return (
     <div>
