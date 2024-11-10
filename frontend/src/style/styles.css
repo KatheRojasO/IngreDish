@@ -1,0 +1,5 @@
+@import "./base/layout.css";
+@import "./base/variables.css";
+@import "./pages/Header.css";
+@import "./components/RecipeCard.css"; 
+@import "./components/Recipes.css"; 
