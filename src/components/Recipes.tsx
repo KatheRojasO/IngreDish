@@ -8,8 +8,7 @@ export function Recipes({ recipesInfo }: RecipesProps) {
 
   return (
     <div className="recipes_container">
-      <h1>Recipes</h1>
-      {recipes}
+      <div className="card-container">{recipes}</div>
     </div>
   );
 }
