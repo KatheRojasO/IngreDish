@@ -8,7 +8,7 @@ import jakarta.persistence.OneToMany;
 import java.util.List;
 
 @Entity
-public class Person {
+public class User {
     @Id
     private long userId;
 
@@ -18,9 +18,9 @@ public class Person {
     @OneToMany
     private List<FavoriteRecipe> favorites;
 
-    public Person() {}
+    public User() {}
 
-    public Person(long userId, String email, String name) {
+    public User(long userId, String email, String name) {
         this.userId = userId;
         this.email = email;
         this.name = name;
