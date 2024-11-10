@@ -16,3 +16,8 @@ export interface RecipesProps {
 export interface RecipeCardProps {
   recipeInfo: Recipe;
 }
+
+export interface UserDataInterface {
+  userId: string|undefined;
+  userName: string|null|undefined;
+}
