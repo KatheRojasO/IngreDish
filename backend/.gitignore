@@ -34,4 +34,5 @@ build/
 
 ### pgdata ###
 data
-/data/
+/data
+/data/pgdata/
