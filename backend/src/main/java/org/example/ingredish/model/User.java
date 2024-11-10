@@ -4,42 +4,34 @@ package org.example.ingredish.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 import java.util.List;
 
 @Entity
+@Table(name = "ingredish_user")
 public class User {
     @Id
-    private long userId;
+    private int userId;
 
-    private String email;
     private String name;
 
     @OneToMany
-    private List<FavoriteRecipe> favorites;
+    private List<UserFavorite> favorites;
 
     public User() {}
 
-    public User(long userId, String email, String name) {
+    public User(int userId, String name) {
         this.userId = userId;
-        this.email = email;
         this.name = name;
     }
 
-    public long getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getName() {
@@ -50,7 +42,11 @@ public class User {
         this.name = name;
     }
 
-    public List<FavoriteRecipe> getFavorites() {
+    public List<UserFavorite> getFavorites() {
         return favorites;
+    }
+
+    public void setFavorites(List<UserFavorite> favorites){
+        this.favorites = favorites;
     }
 }

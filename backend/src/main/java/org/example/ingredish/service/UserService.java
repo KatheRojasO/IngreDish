@@ -1,0 +1,95 @@
+package org.example.ingredish.service;
+
+
+import jakarta.transaction.Transactional;
+import org.example.ingredish.controller.FavoriteDTO;
+import org.example.ingredish.controller.UserFavoriteDTO;
+import org.example.ingredish.model.User;
+import org.example.ingredish.model.UserFavorite;
+import org.example.ingredish.repository.UserFavoriteImpl;
+import org.example.ingredish.repository.UserRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class UserService {
+    private final UserFavoriteImpl favRepo;
+
+    private final UserRepository userRepo;
+
+    public UserService(UserFavoriteImpl favRepo, UserRepository userRepo) {
+        this.favRepo = favRepo;
+        this.userRepo = userRepo;
+    }
+
+    public void addUser(int userId, String userName){
+        User user = new User();
+
+        user.setUserId(userId);
+        user.setName(userName);
+        user.setFavorites(new ArrayList<>());
+
+        userRepo.createOrUpdateUser(user);
+    }
+
+    public void addFavoriteToUser(int userId, FavoriteDTO favoriteDto){
+        Optional<User> userOptional = userRepo.findUserByUserId(userId);
+        if(userOptional.isEmpty()){
+            throw new RuntimeException("No user found for id:" + userId);
+        }
+        User user = userOptional.get();
+
+        boolean favoriteAlreadyExists = user.getFavorites().stream()
+                .anyMatch(favorite -> favorite.getRecipeId() == favoriteDto.id());
+        if (favoriteAlreadyExists){
+            throw new IllegalArgumentException("favorite already exists");
+        }
+        UserFavorite userFav = new UserFavorite();
+        userFav.setUser(user);
+        userFav.setRecipeId(favoriteDto.id());
+        userFav.setTitle(favoriteDto.title());
+        userFav.setImage(favoriteDto.image());
+
+        List<UserFavorite> currentFavorites = user.getFavorites();
+        currentFavorites.add(userFav);
+        user.setFavorites(currentFavorites);
+
+        favRepo.addFavoriteRecipe(userFav);
+        userRepo.createOrUpdateUser(user);
+    }
+
+    public UserFavoriteDTO getUserFavoritesByUserId(int userId){
+        Optional<User> userOptional = userRepo.findUserByUserId(userId);
+        if(userOptional.isEmpty()){
+            throw new RuntimeException("No user found for id:" + userId);
+        }
+
+        User user = userOptional.get();
+
+        List<FavoriteDTO> favorites = user.getFavorites().stream()
+                .map(favorite -> new FavoriteDTO(favorite.getRecipeId(), favorite.getTitle(), favorite.getImage()))
+                .toList();
+
+        return new UserFavoriteDTO(user.getUserId(), user.getName(), favorites);
+    }
+
+    @Transactional
+    public void deleteFavoriteForUser(int userId, int recipeId){
+        Optional<User> userOptional = userRepo.findUserByUserId(userId);
+        if(userOptional.isEmpty()){
+            throw new RuntimeException("No user found for id:" + userId);
+        }
+
+        User user = userOptional.get();
+
+        List<UserFavorite> favorites = user.getFavorites();
+        favorites.removeIf(favorite -> recipeId == favorite.getRecipeId());
+        user.setFavorites(favorites);
+
+        userRepo.createOrUpdateUser(user);
+        favRepo.deleteFavorite(userId, recipeId);
+    }
+}
