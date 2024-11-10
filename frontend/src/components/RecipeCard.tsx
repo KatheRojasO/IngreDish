@@ -2,13 +2,25 @@ import { useState } from "react";
 import { RecipeCardProps } from "../types/Recipe";
 import HeartFilledIcon from "../assets/images/HeartFilledIcon";
 import HeartOutlineIcon from "../assets/images/HeartOutlineIcon";
+import { useUser } from "@clerk/clerk-react";
+import { addFavorite, removeFavorite } from "../helper/UserFavoritesHelper";
 
-export function RecipeCard({ recipeInfo }: RecipeCardProps) {
-  const [liked, setLiked] = useState(false);
+export function RecipeCard({ recipeInfo, defautlFavoriteValue }: RecipeCardProps) {
+  const [liked, setLiked] = useState(defautlFavoriteValue);
+  const { user } = useUser();
 
   const toggleLike = () => {
+    saveFavoriteSelection(!liked);
     setLiked(!liked);
   };
+
+  function saveFavoriteSelection(favoriteSelected: boolean) {
+    if (favoriteSelected) {
+      addFavorite(user?.id, recipeInfo);
+    } else {
+      removeFavorite(user?.id, recipeInfo.id);
+    }
+  }
 
   return (
     <div className="card">

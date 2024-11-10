@@ -10,11 +10,13 @@ export interface SearchBarProps {
 }
 
 export interface RecipesProps {
-  recipesInfo: Recipe[];
+  recipesInfo: Recipe[]|[];
+  isFavoritePage: boolean;
 }
 
 export interface RecipeCardProps {
   recipeInfo: Recipe;
+  defautlFavoriteValue: boolean;
 }
 
 export interface UserDataInterface {
