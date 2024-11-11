@@ -1,0 +1,39 @@
+.main-page-container {
+  background-image: url("../../assets/welcome-image.png");
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.welcome-image {
+  width: 100%;
+  margin-top: var(--space-big);
+}
+
+.info-container {
+  
+}
+
+.text-block {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: fadeIn 5s;
+  background-color: var(--color-white);
+  padding: var(--space-big);
+  border-radius: var(--space-small);
+  text-align: center;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
