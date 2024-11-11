@@ -10,3 +10,10 @@ body {
   padding: 0;
   background-color: var(--color-beige);
 }
+
+
+.blabla{
+
+  display: flex;
+  justify-content: center;
+}

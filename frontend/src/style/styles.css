@@ -5,4 +5,5 @@
 @import "./components/Recipes.css"; 
 @import "./components/SearchBar.css"; 
 @import "./pages/MainPage.css";
+@import "./pages/RecipeInstructionsPage.css";
 @import "./components/WelcomePageHeader.css";
