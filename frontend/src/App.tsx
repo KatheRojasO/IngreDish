@@ -19,7 +19,7 @@ export default function App() {
           <Route path="/" element={<RecipePage />} />
           <Route path="/favorites" element={<FavoritesPage />} />
           <Route
-            path="/recipeDescription"
+            path="/recipe/:recipeId"
             element={<RecipeInstructionsPage />}
           />
         </Routes>

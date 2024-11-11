@@ -11,9 +11,7 @@ body {
   background-color: var(--color-beige);
 }
 
-
-.blabla{
-
+.card-container {
   display: flex;
   justify-content: center;
 }

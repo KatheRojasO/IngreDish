@@ -38,7 +38,7 @@ export function RecipeCard({
         <button onClick={toggleLike} className="like-button">
           {liked ? <HeartFilledIcon /> : <HeartOutlineIcon />}
         </button>
-        <Link to="/recipeDescription">
+        <Link to={{ pathname: `/recipe/${recipeInfo.id}`}}>
           <button className="recipe-button">Go to recipe</button>
         </Link>
       </div>

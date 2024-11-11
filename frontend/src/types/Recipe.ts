@@ -10,7 +10,7 @@ export interface SearchBarProps {
 }
 
 export interface RecipesProps {
-  recipesInfo: Recipe[]|[];
+  recipesInfo: Recipe[] | [];
   isFavoritePage: boolean;
 }
 
@@ -20,6 +20,20 @@ export interface RecipeCardProps {
 }
 
 export interface UserDataInterface {
-  userId: string|undefined;
-  userName: string|null|undefined;
+  userId: string | undefined;
+  userName: string | null | undefined;
+}
+
+export interface RecipePageProps {
+  recipeId: number;
+}
+
+export interface RecipeInstructions {
+  title: string;
+  image: string;
+  analyzedInstructions: RecipeInstructionSteps[];
+}
+
+export interface RecipeInstructionSteps {
+  steps: { step: string }[];
 }
