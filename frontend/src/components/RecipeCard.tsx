@@ -4,8 +4,12 @@ import HeartFilledIcon from "../assets/images/HeartFilledIcon";
 import HeartOutlineIcon from "../assets/images/HeartOutlineIcon";
 import { useUser } from "@clerk/clerk-react";
 import { addFavorite, removeFavorite } from "../helper/UserFavoritesHelper";
+import { Link } from "react-router-dom";
 
-export function RecipeCard({ recipeInfo, defautlFavoriteValue }: RecipeCardProps) {
+export function RecipeCard({
+  recipeInfo,
+  defautlFavoriteValue,
+}: RecipeCardProps) {
   const [liked, setLiked] = useState(defautlFavoriteValue);
   const { user } = useUser();
 
@@ -30,9 +34,14 @@ export function RecipeCard({ recipeInfo, defautlFavoriteValue }: RecipeCardProps
         alt={recipeInfo.title}
         className="recipe-image"
       />
-      <button onClick={toggleLike} className="like-button">
-        {liked ? <HeartFilledIcon /> : <HeartOutlineIcon />}
-      </button>
+      <div className="card-buttons">
+        <button onClick={toggleLike} className="like-button">
+          {liked ? <HeartFilledIcon /> : <HeartOutlineIcon />}
+        </button>
+        <Link to="/recipeDescription">
+          <button className="recipe-button">Go to recipe</button>
+        </Link>
+      </div>
     </div>
   );
 }
