@@ -7,9 +7,9 @@ export function Header() {
     <header className="header">
       <div className="header-container">
         <img src={logo} alt="logo" className="logo" />
-        <div>
+        <div className="header-right">
           <Link to="/favorites">
-            <button>My favorites</button>
+            <button className="my-fav-btn">My favorites</button>
           </Link>
           <UserButton />
         </div>
