@@ -20,7 +20,7 @@ export function SearchBar({ recipesInfo, setFilteredRecipes }: SearchBarProps) {
 
 
   return (
-    <div>
+    <div className="searchbar-container">
       <form>
         <input
           placeholder="Type ingredients..."
